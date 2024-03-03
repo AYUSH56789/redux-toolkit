@@ -1,20 +1,19 @@
-// step - 6
-
 import React from 'react'
-import {  useDispatch, useSelector } from 'react-redux';
-import {incAction, decAction} from './actions/index'
+import { useSelector } from 'react-redux'
+import InputTodo from './InputTodo'
+import Counter from './Counter'
 export default function App() {
-  // useSelector to select state which return all values
-  const myState=useSelector((state)=>state.changeNumber);
-  const dispatch=useDispatch();
+  const todos=useSelector(state=>state.todoStore.todos)
+  console.log("state",todos)
   return (
-    <div className=" text-center m-5">
-      <h1>Increment and Decrement using Redux</h1>
-      <div className="btn-group text-center m-5" role="group" aria-label="Basic example">
-        <button type="button" onClick={()=>dispatch(decAction(2))} className="btn btn-outline-success">-1</button>
-        <button type="button" className="btn btn-light disabled border" >{myState}</button>
-        <button type="button" onClick={()=>dispatch(incAction(4))} className="btn btn-outline-success">+1</button>
-      </div>
+    <div>
+      <Counter/>
+      <h1 className='text-center m-4'>AYUSH- TODO APPLICATION</h1>
+      <InputTodo/>
+      <h1 className='text-center m-4'> -TODOS- </h1>
+      {todos.map((todo)=>(
+        <li key={todo.id}>{todo.task}</li>
+      ))}
     </div>
   )
 }
